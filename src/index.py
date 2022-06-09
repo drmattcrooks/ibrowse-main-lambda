@@ -6,7 +6,7 @@ print("loading lambda")
 
 def lambda_handler(event, context):
     question = "A question"
-    return return {
+    return {
         "isBase64Encoded": True,
         "statusCode": 200,
         "headers": { "headerName": "headerValue"},
