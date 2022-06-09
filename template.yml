@@ -1,22 +1,41 @@
-AWSTe.gitignoremplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  A Python Lambda which demonstrates running a lambda locally with AWS SAM.
+  github-actions-with-aws-sam
+
+  Sample SAM Template for github-actions-with-aws-sam
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 3
 
 Resources:
-  ibrowseMainFunction:
+  iBrowseMainFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: src/
       Handler: index.lambda_handler
-      Runtime: python3.7
-      Environment:
-        Variables:
-          S3_BUCKET: ''
-          S3_FOLDER: ''
-          S3_CONFIG: ''
+      Runtime: python3.8
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /event
+            Method: get
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  iBrowseMainApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ibrowse-main/"
+  iBrowseMainFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt iBrowseMainFunction.Arn
+  iBrowseMainFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt iBrowseMainFunctionRole.Arn
