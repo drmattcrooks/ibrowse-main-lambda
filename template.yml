@@ -20,10 +20,10 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
+        iBrowseMain:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /event
+            Path: /main
             Method: get
 
 Outputs:
@@ -31,11 +31,11 @@ Outputs:
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   iBrowseMainApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Description: "API Gateway endpoint URL for Prod stage for iBrowse Main function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ibrowse-main/"
   iBrowseMainFunction:
-    Description: "Hello World Lambda Function ARN"
+    Description: "iBrowse Main Lambda Function ARN"
     Value: !GetAtt iBrowseMainFunction.Arn
   iBrowseMainFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
+    Description: "Implicit IAM Role created for iBrowse Main function"
     Value: !GetAtt iBrowseMainFunctionRole.Arn
