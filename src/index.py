@@ -5,10 +5,10 @@ print("loading lambda")
 
 
 def lambda_handler(event, context):
-    question = "A question"
+    search_term = event.get('search_term', 'non-passed')
     return {
         "isBase64Encoded": True,
         "statusCode": 200,
         "headers": { "headerName": "headerValue"},
-        "body": f"{json.dumps({'Matt Says': f'A Random Number: {1}'})}"
+        "body": f"{json.dumps({'Search Term': search_term)}"
     }
