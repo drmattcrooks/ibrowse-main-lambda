@@ -10,5 +10,5 @@ def lambda_handler(event, context):
         "isBase64Encoded": True,
         "statusCode": 200,
         "headers": { "headerName": "headerValue"},
-        "body": f"{json.dumps({'Search Term': search_term)}"
+        "body": f"{json.dumps({'Search Term': search_term})}"
     }
