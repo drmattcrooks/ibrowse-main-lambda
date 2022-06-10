@@ -5,7 +5,7 @@ print("loading lambda")
 
 
 def lambda_handler(event, context):
-    search_term = event.get('search_term', 'non-passed')
+    search_term = event.get('searchTerm', 'non-passed')
     return {
         "isBase64Encoded": True,
         "statusCode": 200,
